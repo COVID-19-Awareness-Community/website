@@ -7,9 +7,9 @@ import ExtUrl from "../components/ext-url";
 
 import generateUrls from '../data/urls';
 
-const filterUrls = (data, {searchInput}) => data.filter(({url, label, description}) => [url, label, description].find(field => field.indexOf(searchInput) >= 0))
-  .map(({url, label, type, description}) => (
-    <div className="columns" key={url}>
+const filterUrls = (data, {searchInput}) => data.filter(({url, label, description, category}) => [url, label, description].find(field => field.indexOf(searchInput) >= 0))
+  .map(({url, label, type, description, category}) => (
+    <div className="columns" key={category+url}>
       <div className="column">
         <div className="card">
           <div className="card-header">
@@ -20,6 +20,7 @@ const filterUrls = (data, {searchInput}) => data.filter(({url, label, descriptio
             </div>
           </div>
           <div className="card-content">
+              <p>Category: { category }</p>
               <p>Type: {type}</p>
               <p>Description: {description || "(No Description)"}</p>
           </div>
@@ -53,7 +54,6 @@ class IndexPage extends React.Component {
   
   render() {
     const { data, searchInput } = this.state;
-    console.log(data);
     const externalUrls = filterUrls(data, { searchInput });
 
     return (
