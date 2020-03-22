@@ -5,16 +5,26 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import ExtUrl from "../components/ext-url";
 
-import urls from '../data/urls';
+import generateUrls from '../data/urls';
 
-const generateUrls = ({searchInput}) => urls
-  .filter(({url, label, description}) => [url, label, description].find(field => field.indexOf(searchInput) >= 0))
-  .map(({url, label, description}) => (
-    <div className="column" key={url}>
-        <ExtUrl url={url}>
-          <p className="title is-4">{label}</p>
-          <p className="subtitle">{description}</p>
-        </ExtUrl>
+const filterUrls = (data, {searchInput}) => data.filter(({url, label, description}) => [url, label, description].find(field => field.indexOf(searchInput) >= 0))
+  .map(({url, label, type, description}) => (
+    <div className="columns" key={url}>
+      <div className="column">
+        <div className="card">
+          <div className="card-header">
+            <div className="card-title">
+              <ExtUrl url={url}>
+                <p className="title is-4">{label}</p>
+              </ExtUrl>
+            </div>
+          </div>
+          <div className="card-content">
+              <p>Type: {type}</p>
+              <p>Description: {description || "(No Description)"}</p>
+          </div>
+        </div>
+      </div>
     </div>
   ))
 
@@ -22,7 +32,8 @@ class IndexPage extends React.Component {
   constructor() {
     super(...arguments);
     this.state = {
-      searchInput: ''
+      searchInput: '',
+      data: []
     }
   }
 
@@ -33,10 +44,17 @@ class IndexPage extends React.Component {
       searchInput: value
     });
   }
+
+  componentDidMount() {
+    generateUrls().then(data => {
+      this.setState({ data })
+    })
+  }
   
   render() {
-    const { searchInput } = this.state;
-    const externalUrls = generateUrls({ searchInput });
+    const { data, searchInput } = this.state;
+    console.log(data);
+    const externalUrls = filterUrls(data, { searchInput });
 
     return (
       <Layout>
@@ -46,9 +64,7 @@ class IndexPage extends React.Component {
           <input name="search-input" id="search-input" type="text" className="input" placeholder="Search..." onChange={evt => this.handleSearch(evt)}/>
         </section>
         <section className="section">
-          <div className="columns"> 
             { externalUrls }
-          </div>
         </section>
       </Layout>
     );
