@@ -5,7 +5,7 @@ module.exports = {
     author: `@monarchwadia`,
     siteUrl: 'https://www.torontopandemic.ca'
   },
-  pathPrefix: '/website',
+  // pathPrefix: '/website',
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
