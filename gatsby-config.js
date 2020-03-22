@@ -3,6 +3,7 @@ module.exports = {
     title: `COVID-19 Resources in Toronto`,
     description: `A site where Torontonians can share COVID-19 resources.`,
     author: `@monarchwadia`,
+    siteUrl: 'https://www.torontopandemic.ca'
   },
   pathPrefix: '/website',
   plugins: [
@@ -46,6 +47,6 @@ module.exports = {
         path: `${__dirname}/src/data/sheet`,
       },
     },
-    // `gatsby-transformer-csv`,
+    'gatsby-plugin-cname'
   ],
 }
