@@ -4,6 +4,7 @@ module.exports = {
     description: `A site where Torontonians can share COVID-19 resources.`,
     author: `@monarchwadia`,
   },
+  pathPrefix: '/website',
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
@@ -20,7 +21,7 @@ module.exports = {
       options: {
         name: `gatsby-starter-default`,
         short_name: `starter`,
-        start_url: `/website`,
+        start_url: `/`,
         background_color: `#EEF4F8`,
         theme_color: `#c30000`,
         display: `minimal-ui`,

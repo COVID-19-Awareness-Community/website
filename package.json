@@ -32,7 +32,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf .cache docs && gatsby build && mv public docs",
+    "build": "rm -rf .cache docs && gatsby build --prefix-paths && mv public docs",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
