@@ -14,12 +14,11 @@ const filterUrls = (data, {searchInput}) => data.filter(({url, label, descriptio
         <div className="card">
           <div className="card-header">
             <div className="card-title">
-              <ExtUrl url={url}>
-                <p className="title is-4">{label}</p>
-              </ExtUrl>
+              <p className="title is-4">{label}</p>
             </div>
           </div>
           <div className="card-content">
+              <p>URL: <ExtUrl url={url}>{url}</ExtUrl></p>
               <p>Category: { category }</p>
               <p>Type: {type}</p>
               <p>Description: {description || "(No Description)"}</p>
@@ -59,10 +58,10 @@ class IndexPage extends React.Component {
     return (
       <Layout>
         <SEO title="Home" />
-        <section className="section">
+        {/* <section className="section">
           <label className="search" htmlFor="search-input">Search</label>
           <input name="search-input" id="search-input" type="text" className="input" placeholder="Search..." onChange={evt => this.handleSearch(evt)}/>
-        </section>
+        </section> */}
         <section className="section">
             { externalUrls }
         </section>
